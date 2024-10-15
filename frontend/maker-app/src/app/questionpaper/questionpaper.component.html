@@ -1,0 +1,155 @@
+<div *ngIf="directToQuestion" class="flex flex-col items-center">
+  <div
+    class="container border border-slate-200 hover:border-slate-900 rounded-lg flex flex-wrap justify-center w-96 bg-white shadow-md p-4">
+    <label for="subjectId" class="font-medium p-2 flex justify-center text-lg">Select Subject Name
+      <select id="subjectId" [(ngModel)]="SubjectId" (ngModelChange)="onSubjectChange($event)">
+        <option [value]="item._id" class="font-normal" *ngFor="let item of subName">{{item.subjectName}}</option>
+      </select>
+    </label>
+  </div>
+
+
+  <div class="flex flex-wrap justify-center space-x-4 m-6">
+    <div
+      class="relative flex flex-col bg-white shadow-md border rounded-lg hover:border-slate-900 roundedrounded-lg w-60 p-6 mb-4">
+      <h5 class="text-gray-800 text-xl font-semibold text-center ">
+        {{subjectName}}
+      </h5>
+      <div class="text-center text-gray-600 mt-2">
+        <p class="font-semibold"> Total Question Paper:
+          {{paperCount}}
+        </p>
+      </div>
+    </div>
+  </div>
+
+
+  <div class=" flex flex-wrap justify-center space-x-4 gap-4 ">
+    <div *ngFor="let title of questionpaper"
+      class="relative flex flex-col bg-white shadow-md border border-gray-700 rounded-lg w-6/10 p-6 mb-4 transform hover:scale-105 ">
+      <h5 class="text-rose-950 text-2xl font-semibold text-center hover:text-orange-950">
+        {{title.title}}
+ 
+      </h5>
+      <div class="flex justify-center w-96">
+        <button
+          class="inline-flex items-center m-2  p-2 text-xl font-semibold text-white bg-blue-600 rounded-lg hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-400 focus:ring-opacity-75 transition-all transform hover:scale-105"
+          [routerLink]="['questionPaperForm', title._id]">
+          Add Question Paper
+        </button>
+
+        <button
+          class="inline-flex items-center m-2  p-2 text-xl font-semibold text-white bg-blue-600 rounded-lg hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-400 focus:ring-opacity-75 transition-all transform hover:scale-105"
+          [routerLink]="['displayquestionPaper', title._id]">
+          Show Question Paper
+        </button>
+
+        <button
+          class="inline-flex items-center m-2  p-2 text-xl font-semibold text-white bg-blue-600 rounded-lg hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-400 focus:ring-opacity-75 transition-all transform hover:scale-105"
+          [routerLink]="['subject']" (click)="deleteQuestionPaper(title._id)">
+          Delete Question Paper
+        </button>
+      </div>
+    </div>
+
+
+    <form [formGroup]="questionPaperForm" (ngSubmit)="onSubmit()"
+      class="flex flex-col w-full max-w-2xl bg-white border border-slate-300 p-6 rounded-lg shadow-lg space-y-6">
+
+      <h3 class="text-slate-900 font-bold text-center bg-slate-100 py-3 rounded-lg text-2xl">
+        Create Question Paper Title
+      </h3>
+
+      <div class="flex flex-col space-y-2">
+        <label for="title" class="text-slate-700 font-semibold">Question Paper Title</label>
+        <input id="title" type="text" formControlName="title" placeholder="Enter the title of the question paper"
+          class="text-slate-700 p-3 border border-slate-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-slate-500">
+      </div>
+
+
+      <div class="flex justify-center">
+        <button type="submit"
+          class="bg-slate-700 text-white font-bold py-3 px-6 rounded-lg hover:bg-slate-600 focus:ring-4 focus:ring-slate-400">
+          Add Title
+        </button>
+      </div>
+
+    </form>
+
+  </div>
+</div>
+<!-- .//////////////////////////////////////////////////////////////////////////////////////////// -->
+
+
+<article *ngIf="isQuestionPaper" class="flex flex-col items-center">
+
+  <div class="flex flex-wrap justify-center space-x-4 mb-6">
+    <div class="relative flex flex-col bg-white shadow-md border border-gray-200 rounded-lg w-60 p-6 mb-4">
+      <h5 class="text-gray-800 text-xl font-semibold text-center">
+        {{subjectName}}
+      </h5>
+      <div class="text-center text-gray-600 mt-2">
+        <div *ngFor="let subject of subName">
+          <p *ngIf="subject._id == subjectId" class="font-semibold"> Total Question Paper:
+            {{subject.paperCount}}
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="flex flex-row justify-center space-x-4 mb-6 w-7/10">
+    <div *ngFor="let title of questionpaper"
+      class="relative flex flex-col bg-white shadow-md border border-gray-700 rounded-lg w-72 p-6 mb-4 transform hover:scale-105">
+      <h5 class="text-gray-800 text-xl font-semibold text-center mb-4">
+        {{ title.title }}
+      </h5>
+
+
+      <div class="flex flex-col space-y-2">
+        <button routerLink='../../../../' 
+          class="inline-flex items-center justify-center p-2 text-lg font-semibold text-white bg-blue-600 rounded-lg hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-400 focus:ring-opacity-75 transition-all transform hover:scale-105"
+          [routerLink]="['questionPaperForm', title._id]">
+          Add Question Paper
+        </button>
+
+        <button routerLink='../../../../' 
+          class="inline-flex items-center justify-center p-2 text-lg font-semibold text-white bg-blue-600 rounded-lg hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-400 focus:ring-opacity-75 transition-all transform hover:scale-105"
+          [routerLink]="['displayquestionPaper', title._id]">
+          Show Question Paper
+        </button>
+
+        <button routerLink='../../../../'
+          class="inline-flex items-center justify-center p-2 text-lg font-semibold text-white bg-red-600 rounded-lg hover:bg-red-700 focus:outline-none focus:ring-2 focus:ring-red-400 focus:ring-opacity-75 transition-all transform hover:scale-105"
+          (click)="deleteQuestionPaper(title._id)">
+          Delete Question Paper
+        </button>
+      </div>
+    </div>
+  </div>
+
+
+  <form [formGroup]="questionPaperForm" (ngSubmit)="onSubmit()"
+    class="flex flex-col w-full max-w-2xl bg-white border border-slate-300 p-6 rounded-lg shadow-lg space-y-6">
+
+    <h3 class="text-slate-900 font-bold text-center bg-slate-100 py-3 rounded-lg text-2xl">
+      Create Question Paper Title
+    </h3>
+
+    <div class="flex flex-col space-y-2">
+      <label for="title" class="text-slate-700 font-semibold">Question Paper Title</label>
+      <input id="title" type="text" formControlName="title" placeholder="Enter the title of the question paper"
+        class="text-slate-700 p-3 border border-slate-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-slate-500">
+    </div>
+
+
+    <div class="flex justify-center">
+      <button type="submit" 
+        class="bg-slate-700 text-white font-bold py-3 px-6 rounded-lg hover:bg-slate-600 focus:ring-4 focus:ring-slate-400">
+        Add Title
+      </button>
+    </div>
+
+  </form>
+</article>
+
+<router-outlet></router-outlet>

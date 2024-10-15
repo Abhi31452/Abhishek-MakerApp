@@ -1,0 +1,83 @@
+<section class="bg-gray-50 dark:bg-gray-900 mt-10 min-h-screen">
+  <div class="flex flex-col items-center justify-center px-6 py-8 mx-auto">
+    <div class="w-full max-w-md bg-white rounded-lg shadow-lg dark:bg-gray-800">
+      <div class="p-8 space-y-6">
+        <h1 class="text-2xl font-bold leading-tight text-gray-900 dark:text-white text-center">
+          Create an Account
+        </h1>
+        <form [formGroup]="signup" (ngSubmit)="collectData()" class="space-y-4">
+
+          <div>
+            <label for="username" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Username</label>
+            <input type="text" id="username" placeholder="Enter your Name" formControlName="username"
+              class="bg-gray-50 border border-gray-300 text-gray-900 rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" />
+            <div *ngIf="signup.get('username')?.touched && signup.get('username')?.invalid" class="text-red-500">
+              <span *ngIf="signup.get('username')?.hasError('required')">User name is required</span>
+              <span *ngIf="signup.get('username')?.hasError('pattern')">Invalid characters. Only letters are
+                allowed </span>
+              <span *ngIf="signup.get('username')?.hasError('minlength')">Name must be at least 2 characters long</span>
+            </div>
+          </div>
+
+          <div>
+            <label for="email" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Email</label>
+            <input type="email" id="email" placeholder="Enter your Email" formControlName="email"
+              class="bg-gray-50 border border-gray-300 text-gray-900 rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" />
+            <div *ngIf="signup.get('email')?.touched && signup.get('email')?.invalid" class="text-red-500">
+              <span *ngIf="signup.get('email')?.hasError('required')">Email is required</span>
+              <span *ngIf="signup.get('email')?.hasError('email')">Invalid email format</span>
+            </div>
+          </div>
+
+          <div>
+            <label for="phoneNo" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Phone
+              Number</label>
+            <input type="text" id="phoneNo" placeholder="Enter your Phone Number" formControlName="phoneNo"
+              class="bg-gray-50 border border-gray-300 text-gray-900 rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" />
+            <div *ngIf="signup.get('phoneNo')?.touched && signup.get('phoneNo')?.invalid" class="text-red-500">
+              <span *ngIf="signup.get('phoneNo')?.hasError('required')">Phone number is required</span>
+              <span *ngIf="signup.get('phoneNo')?.hasError('pattern')">Phone number must be 10 digits long</span>
+            </div>
+          </div>
+
+          <div>
+            <label for="password" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Password</label>
+            <input type="password" id="password" placeholder="Enter your Password" formControlName="password"
+              class="bg-gray-50 border border-gray-300 text-gray-900 rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" />
+            <div *ngIf="signup.get('password')?.touched && signup.get('password')?.invalid" class="text-red-500">
+              <span *ngIf="signup.get('password')?.hasError('required')">Password is required</span>
+              <span *ngIf="signup.get('password')?.hasError('minlength')">Password must be at least 5 characters
+                long</span>
+              <span *ngIf="signup.get('password')?.hasError('maxlength')">Password cannot exceed 10 characters</span>
+            </div>
+          </div>
+          <div>
+            <label for="confirmPassword" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Confirm
+              Password</label>
+            <input type="password" id="confirmPassword" placeholder="Confirm your Password"
+              formControlName="confirmPassword"
+              class="bg-gray-50 border border-gray-300 text-gray-900 rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" />
+            <div *ngIf="signup.errors?.['mismatch'] && signup.get('confirmPassword')?.touched" class="text-red-500">
+              <span>Passwords do not match</span>
+            </div>
+            <div
+              *ngIf="signup.get('confirmPassword')?.touched && signup.get('confirmPassword')?.invalid && !signup.errors?.['mismatch']"
+              class="text-red-500">
+              <span *ngIf="signup.get('confirmPassword')?.hasError('required')">Confirm password is required</span>
+            </div>
+          </div>
+
+          <button type="submit"
+            class="w-full text-white bg-blue-600 hover:bg-blue-700 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">
+            Sign Up
+          </button>
+
+          <p class="text-sm font-light text-gray-500 dark:text-gray-400 text-center">
+            Already have an account?
+            <a href="#" class="font-medium text-blue-600 hover:underline dark:text-blue-500">Login</a>
+          </p>
+        </form>
+      </div>
+    </div>
+  </div>
+</section>

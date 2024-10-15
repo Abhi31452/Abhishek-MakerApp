@@ -1,0 +1,38 @@
+<article *ngIf="this.isDashboardRoute" class="flex flex-wrap justify-center gap-x-52">
+    <div
+        class="border border-slate-300 p-6 rounded-lg shadow-lg w-96 h-auto m-5 bg-white dark:bg-gray-800 dark:border-gray-700 flex flex-col">
+        <h5 class="p-2 text-3xl text-left font-semibold hover:text-blue-600 text-gray-900 dark:text-white">Subjects</h5>
+        <p class="m-2 text-lg font-semibold text-gray-700 dark:text-gray-400">
+            Total Number of Subjects : <strong class="pl-10">{{subjectCount}}</strong></p>
+        <div class="mt-auto flex justify-center ">
+            <a routerLinkActive="activeLink" routerLink="subject"
+                class="flex items-center text-white bg-blue-600 hover:bg-blue-700 px-4 py-2.5 rounded-lg shadow-lg">
+                Add Subject
+                <svg class="w-6 h-6 ml-2" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 24 24">
+                    <path d="M9 18l6-6-6-6" />
+                </svg>
+            </a>
+        </div>
+    </div>
+
+
+    <div
+        class="border border-slate-300 p-6 rounded-lg shadow-lg w-96 h-auto flex flex-col justify-between m-5 bg-white dark:bg-gray-800 dark:border-gray-700">
+        <h5 class="p-2 text-3xl text-left font-semibold hover:text-blue-600 text-gray-900 dark:text-white">Question
+            Papers</h5>
+        <p class="m-2 text-lg font-semibold text-gray-700 dark:text-gray-400">Total Number of Question Papers:<strong class="pl-10">{{questionCount}}</strong></p>
+        <div class="mt-auto flex justify-center">
+            <a routerLinkActive="activeLink" routerLink="../questionpaper"
+                class="flex items-center text-white bg-blue-600 hover:bg-blue-700 px-4 py-2.5 rounded-lg shadow-lg">
+                Add Question Paper
+                <svg class="w-6 h-6 ml-2" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 24 24">
+                    <path d="M9 18l6-6-6-6" />
+                </svg>
+            </a>
+        </div>
+    </div>
+</article>
+
+<div *ngIf="this.route.url == '/dashboard'" class="m-10 shadow-lg  border border-slate-700"></div>
+
+<router-outlet></router-outlet>
